@@ -1,4 +1,5 @@
 package Experiment_3;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -44,7 +45,7 @@ public class TestStack implements ActionListener{
 		f.setJMenuBar(menubar);
 		//创建窗口屏幕上的对象
 		f.setLayout(new GridLayout(4,1,10,10));//网格布局
-		Label lInput = new Label("输入元素");
+		Label lInput =new Label("输入元素");
 		Label lOutput = new Label("输出内容");
 		Label lSpace = new Label("");
 		input = new JTextField(5);

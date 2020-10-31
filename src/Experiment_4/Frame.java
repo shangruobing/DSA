@@ -15,7 +15,6 @@ public class Frame implements ActionListener{
 		Frame world = new Frame();
 		world.run();
 	}
-
 */
 
 	public void run(){

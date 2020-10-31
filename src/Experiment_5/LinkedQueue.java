@@ -3,6 +3,7 @@ package Experiment_5;
 public class LinkedQueue<T> implements QueueADT<T> {
 	private int count;
 	private LinearNode<T> front, rear;
+
 	public LinkedQueue()
 	{
 		count = 0;
@@ -26,20 +27,36 @@ public class LinkedQueue<T> implements QueueADT<T> {
 		rear = node;
 		count++;
 	}
-	public T first() throws EmptyCollectionException {
- //... ...
+	public T first() throws EmptyCollectionException{
+		if (isEmpty())
+			throw new EmptyCollectionException("queue");
+		else
+			return front.getElement();
+		}
 
-	}
 	public boolean isEmpty() {
-		return true;
- //... ...
+		if(count==0)
+			return true;
+		else
+			return false;
 	}
 	public int size() {
-		return 0;
- //... ...
+		return count;
+
 	}
 	public String toString(){
-		return "2";
- //... ...
+		LinearNode<T> store; //用于储存front的初始值
+		String result;
+		result="";
+		store=front;
+		for (int i=0;i<count;i++){
+			result+=front.getElement().toString()+" ";
+			if (front.getNext()!=null)
+				front = front.getNext();
+			System.out.println(front);
+		}
+		front=store;
+		return result;
 	}
+
 }

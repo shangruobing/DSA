@@ -40,19 +40,31 @@ public class CircularArrayQueue<T> implements QueueADT<T>{
 		queue = larger;
 	}
 	public T first() throws EmptyCollectionException {
-		//... ...
-
+		if (isEmpty())
+			throw new EmptyCollectionException("queue");
+		else
+		return queue[front];
 	}
 	public boolean isEmpty() {
-		return true;
-		//... ...
+		if(count==0)
+			return true;
+		else
+			return false;
 	}
 	public int size() {
-		return 0;
-		//... ...
+		return count;
+
 	}
 	public String toString(){
-		return "2";
-		//... ...
+		String result;
+		int store; //用于储存front的初始值
+		store=front;
+		result="";
+		for (int i=0;i<count;i++) {
+			result += queue[front] + " ";
+			front++;
+		}
+		front=store;
+		return result;
 	}
 }
