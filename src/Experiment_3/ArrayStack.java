@@ -117,9 +117,12 @@ public class ArrayStack<T> implements StackADT<T> {
         return result;
 
         /*
-        return Arrays.toString(stack); 导致Arrays全输出 抛弃
+        return Arrays.toString(stack); //导致Arrays全输出 抛弃
+
 		For example push 1 2 3 ;Arrays.length=5
 		Output 1 2 3 null null
-		*/
+
+         */
+
 	}
 }

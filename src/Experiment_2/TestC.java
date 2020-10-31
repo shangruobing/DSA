@@ -64,7 +64,6 @@ public class TestC implements ActionListener {
 			if ((jTextField.getText().equals("sys")) && (String.valueOf(jPasswordField.getPassword()).equals("123"))) {
 			// IDEA提示 getText 方法被抛弃 'getText()' is deprecated
 			// if (jTextField.getText().equals("sys") && jPasswordField.getText().equals("123")) {
-
 				title.setText("注册成功");
 			} else
 				title.setText("注册错误，请重注册!");
