@@ -14,7 +14,7 @@ public class TestFrame implements ActionListener {
 	}
 	public void run(){
 		 //定义窗口变量并实例化，窗口是边框布局的
-		 frame = new JFrame("实验二 窗口范例--修订版"); //创建窗口
+		 frame = new JFrame("实验二 窗口范例--尚若冰"); //创建窗口
 		 JLabel title = new JLabel("学生信息输入");   //定义标签变量并实例化
 		 JPanel p = new JPanel();                       //定义并实例化面板变量
 		 p.add(title);                                  //将标签放到面板中
