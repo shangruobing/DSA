@@ -36,9 +36,6 @@ public class Frame implements ActionListener {
 		buttonGroup.add(jRadioButton1);
 		buttonGroup.add(jRadioButton2);
 
-
-
-
 		JMenuBar menubar =new JMenuBar();//设置队列操作
 		JMenu menu=new JMenu("队列操作");
 		enqueue= new JMenuItem("enqueue()");
