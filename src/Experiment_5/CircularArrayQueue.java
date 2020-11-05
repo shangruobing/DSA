@@ -1,12 +1,12 @@
 package Experiment_5;
 
 public class CircularArrayQueue<T> implements QueueADT<T>{
-	private final int DDFAULT_CAPACITY	=100;
+	private final int DEFAULT_CAPACITY	=100;
 	private int front, rear, count;
 	private T[] queue;
 	public CircularArrayQueue(){
 		front = rear = count = 0;
-		queue = (T[])( new Object[DDFAULT_CAPACITY]);
+		queue = (T[])( new Object[DEFAULT_CAPACITY]);
 	}
 	public CircularArrayQueue(int initialCapacity){
 		front = rear = count = 0;
@@ -17,7 +17,7 @@ public class CircularArrayQueue<T> implements QueueADT<T>{
 			throw new EmptyCollectionException("queue");
 		T result = queue[front];
 		queue[front]=null;
-		front = (front+1)%queue.length;
+		front = (front+1)%queue.length; //对队首取模
 		count--;
 		return result;
 	}
@@ -25,14 +25,14 @@ public class CircularArrayQueue<T> implements QueueADT<T>{
 		if (size()==queue.length)
 			expandCapacity();
 		queue[rear] = element;
-		rear = (rear+1)%queue.length;
+		rear = (rear+1)%queue.length; //对队尾取模
 		count++;
 	}
 	public void expandCapacity()
 	{
 		T[] larger = (T[])(new Object[queue.length*2]);
-		for (int scan=0;scan<count; scan++)
-		{  larger[scan] =queue[front];
+		for (int scan=0;scan<count; scan++) {
+			larger[scan] =queue[front];
 			front = (front+1)% queue.length;
 		}
 		front = 0;
