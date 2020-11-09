@@ -1,4 +1,4 @@
-package Experiment_3;
+package Experiment_7;
 
 import java.util.Arrays;
 
@@ -88,7 +88,10 @@ public class ArrayStack<T> implements StackADT<T> {
 	 * @return true if this stack is empty
 	 */
 	public boolean isEmpty() {
-		return stack[0] == null;
+		if(stack[0] == null)
+			return true;
+		else
+			return false;
 	}
 
 	/**

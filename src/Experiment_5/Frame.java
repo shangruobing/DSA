@@ -12,8 +12,8 @@ public class Frame implements ActionListener {
 	private JRadioButton jRadioButton1,jRadioButton2;
 	private JPanel jPanel1,jPanel2,jPanel3;
 	private JMenuItem enqueue,dequeue,first,size,toString,isEmpty,exit;
-	CircularArrayQueue<String>queue1 =new CircularArrayQueue<String>();
-	LinkedQueue<String> queue2=new LinkedQueue<String>();
+	CircularArrayQueue<String>queue1 =new CircularArrayQueue<>();
+	LinkedQueue<String> queue2=new LinkedQueue<>();
 
 
 /*	public static void main(String[] args) {
@@ -97,7 +97,7 @@ public class Frame implements ActionListener {
 
 		//CircularArrayQueue<String>queue2 =new CircularArrayQueue<>();
 
-		if(jRadioButton1.isSelected()==true)
+		if(jRadioButton1.isSelected())
 			queue=queue1;
 		else
 			queue=queue2;
@@ -113,14 +113,14 @@ public class Frame implements ActionListener {
 		}
 		if(mi==dequeue){
 			try {
-				output.setText(queue.dequeue().toString());
+				output.setText(queue.dequeue());
 			} catch (EmptyCollectionException e1) {
 				e1.printStackTrace();
 			}
 		}
 		if(mi==first){
 			try {
-				output.setText(queue.first().toString());
+				output.setText(queue.first());
 			} catch (EmptyCollectionException e1) {
 				e1.printStackTrace();
 			}
