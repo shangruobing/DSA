@@ -61,7 +61,7 @@ public class ArrayList<T> implements ListADT<T>,Iterable<T>{
 		return list[0] == null;
 	}
 	public T last() {
-		return list[rear];
+		return list[rear-1];
 	}
 	public T removeFirst() throws EmptyCollectionException {
 		T result;
@@ -70,26 +70,26 @@ public class ArrayList<T> implements ListADT<T>,Iterable<T>{
 			throw new EmptyCollectionException("list");
 
 		result = list[0];
-		for(int scan=index;scan<rear; scan++)
-			list[scan]=list[scan+1];
 		list[0]=null;
+		rear--;
+		for(int scan=0;scan<rear; scan++)
+			list[scan]=list[scan+1];
+
 		return result;
 	}
 	public T removeLast() throws EmptyCollectionException {
 		T result;
-		int index = find(first());
+		int index = find(last());
 		if(index == NOT_FOUND)
 			throw new EmptyCollectionException("list");
 
-		result = list[rear];
+		result = list[rear-1];
+		list[rear-1]=null;
 		rear--;
-		for(int scan=index;scan<rear; scan++)
-			list[scan]=list[scan+1];
-		list[rear]=null;
 		return result;
 	}
 	public int size() {
-		return rear+1;
+		return rear;
 	}
     public String toString(){
     	String result="线性表{";

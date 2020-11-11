@@ -24,7 +24,7 @@ public class TestArrayList extends Frame implements ItemListener, ActionListener
 	//构造函数 ,创建了窗口中的所有显示组件
 	//注意创建的两个输入面板并未加入到窗口中
 	public TestArrayList(){
-		this.setTitle("实验八 数组线性表测试---杜华荣");
+		this.setTitle("实验八 数组线性表测试--尚若冰");
 		theArea = new TextArea(4,50); //创建文本显示框
 		this.add(theArea,BorderLayout.CENTER); //加到窗口中
 		MenuBar MBar = new MenuBar(); //创建菜单栏
@@ -66,6 +66,7 @@ public class TestArrayList extends Frame implements ItemListener, ActionListener
 		world.pack();
 		world.addWindowListener(new CloseQuit());
 		world.setVisible(true);
+		world.setLocation(400,350);
 	}
 
 	private static class CloseQuit extends WindowAdapter {
@@ -244,11 +245,11 @@ public class TestArrayList extends Frame implements ItemListener, ActionListener
 							e1.printStackTrace();
 						}
 						break;
-					case 6: // 显示是否包函某元素
+					case 6: // 显示是否包含某元素
 						if(List.contains(data))
-							theArea.append("线性表包函"+tf1.getText()+"\n");
+							theArea.append("线性表包含"+tf1.getText()+"\n");
 						else
-							theArea.append("线性表不包函"+tf1.getText()+"\n");
+							theArea.append("线性表不包含"+tf1.getText()+"\n");
 				}
 			}
 			if(bt==bOK2){ //输入两个整数面板的确定按纽
