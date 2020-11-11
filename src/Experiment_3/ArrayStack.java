@@ -120,6 +120,5 @@ public class ArrayStack<T> implements StackADT<T> {
 		Output 1 2 3 null null
 
          */
-
 	}
 }
