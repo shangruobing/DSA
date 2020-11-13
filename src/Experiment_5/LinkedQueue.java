@@ -47,13 +47,13 @@ public class LinkedQueue<T> implements QueueADT<T> {
 	public String toString(){
 		LinearNode<T> store; //用于储存front的初始值
 		String result;
-		result="";
+		result="线性表{";
 		store=front;
 		for (int i=0;i<count;i++){
 			result+=front.getElement().toString()+" ";
 			if (front.getNext()!=null)
 				front = front.getNext();
-			System.out.println(front);
+			//System.out.println(front);
 		}
 		front=store;
 		return result;

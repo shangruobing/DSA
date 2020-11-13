@@ -47,26 +47,60 @@ public class LinkedList<T> implements ListADT<T>,Iterable<T> {
 				current = current.getNext();
 		return false;
 	}
-	public T first() {
-	return null;
+
+	public T first(){
+		return head.getElement();
 	}
+
 	public boolean isEmpty() {
-		return true;
+		return count==0;
 	}
+
 	public Iterator<T> iterator() {
 		return new LinkedIterator<T>(head,count);
 	}
+
 	public T last() {
-		return null;
-	}
-	public T removeFirst() throws EmptyCollectionException {
-		return null;
-	}
-	public T removeLast() {
-		return null;
-	}
-	public int size() {
-		return 3;
+		return tail.getElement();
 	}
 
+	public T removeFirst() throws EmptyCollectionException {
+		T result;
+		if (isEmpty())
+			throw new EmptyCollectionException("List");
+		else
+			result=head.getElement();
+			head.setElement(null);
+			head=head.getNext();
+			count--;
+			return result;
+	}
+	public T removeLast() {
+		T result;
+		result=tail.getElement();
+		tail.setElement(null);
+		count--;
+		return result;
+
+	}
+	public int size() {
+		return count;
+	}
+
+	public String toString(){
+		LinearNode<T> store; //用于储存head的初始值
+		String result;
+		result="";
+		store=head;
+		for (int i=0;i<count;i++){
+			result+=head.getElement().toString()+"->";
+
+			if (head.getNext()!=null)
+				head = head.getNext();
+			System.out.println(head);
+		}
+		head=store;
+		result+="null}";
+		return result;
+	}
 }
