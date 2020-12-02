@@ -60,5 +60,4 @@ public class LinkedQueue<T> implements QueueADT<T> {
 		front=store;
 		return result;
 	}
-
 }

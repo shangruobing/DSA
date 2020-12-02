@@ -1,4 +1,6 @@
 package Experiment_6;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Iterator;
@@ -9,17 +11,16 @@ public class CaterpillarGame extends Frame{
 		world.run();
 	}
 	public CaterpillarGame(){
-		setSize((BoardWidth+2)*SegmentSize,
-				BoardHeight*SegmentSize+30);
-		setTitle("实验六，毛毛虫--尚若冰");
+		setSize((BoardWidth+2)*SegmentSize, BoardHeight*SegmentSize+30);
+		setTitle("实验六 毛毛虫--尚若冰");
 		addKeyListener(new KeyReader());
 		addWindowListener(new CloseQuit());
 		setLocation(400,200);
 		setVisible(true);
 	}
 
-	private Caterpillar playerOne =
-			new Caterpillar(Color.blue,new Point(20,10));
+	Caterpillar playerOne = new Caterpillar(Color.green,new Point(20,10));
+	//Caterpillar playerTwo = new Caterpillar(Color.blue,new Point(0,10));
 	final static int BoardWidth = 60; //窗口宽以网格为单位
 	final static int BoardHeight = 40; //窗口高,以网格为单位
 	final static int SegmentSize = 10; //网格大小,以象素点为单位
@@ -28,26 +29,34 @@ public class CaterpillarGame extends Frame{
 		while (true){
 			movePieces(); //虫移动
 			repaint(); //重画桌面
-
 			try{
-				Thread.sleep(100);
+				Thread.sleep( 100-playerOne.score/10 );
 			} catch (Exception e){}//等待 100 毫秒
 		}
 	}
-	public void paint(Graphics g) {
+	public void paint(Graphics g) {//画虫
 		playerOne.paint(g);
-	} //画虫
+		//playerTwo.paint(g);
+	}
 	public void movePieces(){
 		playerOne.move(this);
+		//playerTwo.move(this);
 	}
 	private class KeyReader extends KeyAdapter {
-		public void keyPressed(KeyEvent e){
+		public void keyPressed(KeyEvent e){   //键盘事件类 keyPressed 键按下时
 			char c = e.getKeyChar();
 			switch(c){
 				case 'a': playerOne.setDirection('W');break;
 				case 'd': playerOne.setDirection('E');break;
 				case 'w': playerOne.setDirection('N');break;
 				case 's': playerOne.setDirection('S');break;
+				//default: System.out.println("非法输入"+e.getKeyChar());break;
+		/*		case 'j': playerTwo.setDirection('W');break;
+				case 'l': playerTwo.setDirection('E');break;
+				case 'i': playerTwo.setDirection('N');break;
+				case 'k': playerTwo.setDirection('S');break;
+
+		 */
 			}
 		}
 	}
@@ -75,16 +84,16 @@ public class CaterpillarGame extends Frame{
 				body.enqueue(position);
 			}
 		}
-
+		public int score=0;
 		private Color color;
 		private Point position; //虫头所在位置
-		private char direction ='E'; //虫移动的方向
+		private char direction='E'; //虫移动的方向
 		private QueueADT<Point> body = new LinkedQueue<>();//虫体所在位置
 		private QueueADT<Character> commands = new LinkedQueue<>(); //键盘命令
 
 		public void setDirection(char d) {
 			commands.enqueue(d);
-			System.out.println("键盘命令为"+commands.toString());
+			//System.out.println("键盘命令为"+commands.toString());
 		}
 
 
@@ -95,7 +104,6 @@ public class CaterpillarGame extends Frame{
 				try {
 					c =commands.dequeue();
 					direction = c;
-
 				} catch (EmptyCollectionException e) {
 					e.printStackTrace();
 				}
@@ -108,10 +116,18 @@ public class CaterpillarGame extends Frame{
 					body.dequeue();
 					body.enqueue(np);
 					position = np;
+					score++;
+					//System.out.println("得分为"+score);
 				}
 				catch (EmptyCollectionException e) {
 					e.printStackTrace();
 				}
+			}
+			//不能移动时退出程序
+			else {
+				JOptionPane.showMessageDialog(null,"最终分数为:" + score);
+				System.exit(0);
+
 			}
 		}
 		/**
@@ -121,12 +137,10 @@ public class CaterpillarGame extends Frame{
 		private Point newPosition(){
 			int x = position.x; //获取虫头位置
 			int y = position.y;
-			System.out.println("原位置"+x+","+y);
 			if(direction =='E') x++; //根据移动方向确定下一点
 			else if (direction =='W') x--;
 			else if (direction =='N') y--;
 			else if (direction == 'S') y++;
-			System.out.println("新位置"+x+","+y);
 			return new Point(x,y);
 		}
 		/**
@@ -137,21 +151,22 @@ public class CaterpillarGame extends Frame{
 			g.setColor(color);
 			Iterator<Point> e = body.iterator();
 
-			System.out.println("虫体队列为"+body);
-			System.out.println("迭代器为"+e);
-
 			while(e.hasNext()){ //将虫体用圆形画出来
 				Point p= e.next();
 				if(p!=null)
-				g.fillOval(5+CaterpillarGame.SegmentSize*p.x, 10+CaterpillarGame.SegmentSize*p.y,
-						CaterpillarGame.SegmentSize,
-						CaterpillarGame.SegmentSize);
+				g.fillOval(5+CaterpillarGame.SegmentSize*p.x,10+CaterpillarGame.SegmentSize*p.y,
+						CaterpillarGame.SegmentSize, CaterpillarGame.SegmentSize);
 			}
+			g.setFont(new Font("黑体",Font.BOLD,15));
+			g.setColor(Color.black);
+			g.drawString("得分："+score,10,100);
+
 		}
 		/**
 		 * @param np //测试的点
 		 * @return //虫体是否在这点上在
 		 */
+
 		public boolean inPosition (Point np){
 			Iterator<Point> e = body.iterator();
 			while (e.hasNext()){
@@ -179,6 +194,5 @@ public class CaterpillarGame extends Frame{
 			return false;
 		// 可以移动
 		return true;
-
 	}
 }
