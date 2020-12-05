@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Iterator;
+import java.util.Random;
 
 public class CaterpillarGame extends Frame{
 	public static void main(String []args){
@@ -18,7 +19,7 @@ public class CaterpillarGame extends Frame{
 		setLocation(400,200);
 		setVisible(true);
 	}
-
+    Food food=new Food(Color.red,new Point());
 	Caterpillar playerOne = new Caterpillar(Color.green,new Point(20,10));
 	//Caterpillar playerTwo = new Caterpillar(Color.blue,new Point(0,10));
 	final static int BoardWidth = 60; //窗口宽以网格为单位
@@ -29,6 +30,7 @@ public class CaterpillarGame extends Frame{
 		while (true){
 			movePieces(); //虫移动
 			repaint(); //重画桌面
+			
 			try{
 				Thread.sleep( 100-playerOne.score/10 );
 			} catch (Exception e){}//等待 100 毫秒
@@ -36,6 +38,7 @@ public class CaterpillarGame extends Frame{
 	}
 	public void paint(Graphics g) {//画虫
 		playerOne.paint(g);
+		food.paint(g);
 		//playerTwo.paint(g);
 	}
 	public void movePieces(){
@@ -91,6 +94,7 @@ public class CaterpillarGame extends Frame{
 		private QueueADT<Point> body = new LinkedQueue<>();//虫体所在位置
 		private QueueADT<Character> commands = new LinkedQueue<>(); //键盘命令
 
+
 		public void setDirection(char d) {
 			commands.enqueue(d);
 			//System.out.println("键盘命令为"+commands.toString());
@@ -113,11 +117,21 @@ public class CaterpillarGame extends Frame{
 		//去掉尾部一节,在新的一点加下头部一节
 			if (game.canMove(np)){
 				try {
+					//System.out.println("食物位置"+food.foodPosition);
+					//System.out.println("新位置"+newPosition());
+					//if (food.getFoodPosition().x== newPosition().x&&food.getFoodPosition().y==newPosition().y){
+					if (food.getFoodPosition().equals(newPosition())){
+						body.enqueue(np);
+						position = np;
+					//	System.out.println("cuowuwuwuwuwu");
+					position = np;score++;
+					food.newFoodPosition();}
+					else{
 					body.dequeue();
 					body.enqueue(np);
 					position = np;
-					score++;
-					//System.out.println("得分为"+score);
+					}
+
 				}
 				catch (EmptyCollectionException e) {
 					e.printStackTrace();
@@ -137,6 +151,7 @@ public class CaterpillarGame extends Frame{
 		private Point newPosition(){
 			int x = position.x; //获取虫头位置
 			int y = position.y;
+			System.out.println("虫头位置"+x+y);
 			if(direction =='E') x++; //根据移动方向确定下一点
 			else if (direction =='W') x--;
 			else if (direction =='N') y--;
@@ -160,6 +175,7 @@ public class CaterpillarGame extends Frame{
 			g.setFont(new Font("黑体",Font.BOLD,15));
 			g.setColor(Color.black);
 			g.drawString("得分："+score,10,100);
+
 
 		}
 		/**
@@ -194,5 +210,58 @@ public class CaterpillarGame extends Frame{
 			return false;
 		// 可以移动
 		return true;
+	}
+
+	class Food{
+		Point foodPosition;
+		QueueADT<Point> foodlocation = new LinkedQueue<>();
+		public Food(Color c,Point t) {
+			Color color=c;
+			foodPosition=new Point(10,10);
+			foodlocation.enqueue(foodPosition);
+		}
+			//食物所在位置
+		private Point getFoodPosition() {
+			int x = foodPosition.x; //获取食物位置
+			int y = foodPosition.y;
+			//System.out.println("食物位置"+x+y);
+			return new Point(x, y);
+		}
+
+		private Point newFoodPosition(){
+			//改变食物位置
+			int x,y;
+			Random rand = new Random();
+			int z=rand.nextInt(10)+5;
+
+            if(z>8) {
+	            x = foodPosition.x + rand.nextInt(5) ;
+	            y = foodPosition.y + rand.nextInt(5) ;
+            }
+
+            else {
+            	x = foodPosition.x - rand.nextInt(5);
+            	y = foodPosition.y - rand.nextInt(5) ;
+            }
+
+            foodlocation.dequeue();
+            foodPosition=new Point(x,y);
+			foodlocation.enqueue(foodPosition);
+
+			return new Point(x, y);
+		}
+		public void paint(Graphics g) {
+
+			g.setColor(Color.red);
+			Iterator<Point> e = foodlocation.iterator();
+
+			while (e.hasNext()) { //将食物用圆形画出来
+				Point p = e.next();
+				if (p != null)
+					if (getFoodPosition() != null)
+						g.fillOval(5 + CaterpillarGame.SegmentSize * foodPosition.x, 10 + CaterpillarGame.SegmentSize * foodPosition.y,
+								CaterpillarGame.SegmentSize, CaterpillarGame.SegmentSize);
+			}
+		}
 	}
 }
