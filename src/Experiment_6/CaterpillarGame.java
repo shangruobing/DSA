@@ -13,10 +13,10 @@ public class CaterpillarGame extends Frame{
 	}
 	public CaterpillarGame(){
 		setSize((BoardWidth+2)*SegmentSize, BoardHeight*SegmentSize+30);
-		setTitle("实验六 毛毛虫--尚若冰");
+		setTitle("实验六 贪吃蛇--尚若冰");
 		addKeyListener(new KeyReader());
 		addWindowListener(new CloseQuit());
-		setLocation(400,200);
+		setLocationRelativeTo(null);
 		setVisible(true);
 	}
     Food food=new Food(Color.red,new Point());
@@ -58,7 +58,6 @@ public class CaterpillarGame extends Frame{
 				case 'l': playerTwo.setDirection('E');break;
 				case 'i': playerTwo.setDirection('N');break;
 				case 'k': playerTwo.setDirection('S');break;
-
 		 */
 			}
 		}
@@ -87,7 +86,7 @@ public class CaterpillarGame extends Frame{
 				body.enqueue(position);
 			}
 		}
-		public int score=0;
+		public int score=-1;
 		private Color color;
 		private Point position; //虫头所在位置
 		private char direction='E'; //虫移动的方向
@@ -97,7 +96,6 @@ public class CaterpillarGame extends Frame{
 
 		public void setDirection(char d) {
 			commands.enqueue(d);
-			//System.out.println("键盘命令为"+commands.toString());
 		}
 
 
@@ -118,20 +116,20 @@ public class CaterpillarGame extends Frame{
 			if (game.canMove(np)){
 				try {
 					//System.out.println("食物位置"+food.foodPosition);
-					//System.out.println("新位置"+newPosition());
 					//if (food.getFoodPosition().x== newPosition().x&&food.getFoodPosition().y==newPosition().y){
+					//注意 == 和 equals的区别
 					if (food.getFoodPosition().equals(newPosition())){
 						body.enqueue(np);
 						position = np;
-					//	System.out.println("cuowuwuwuwuwu");
-					position = np;score++;
-					food.newFoodPosition();}
+						position = np;
+						score++;
+						food.newFoodPosition();
+					}
 					else{
 					body.dequeue();
 					body.enqueue(np);
 					position = np;
 					}
-
 				}
 				catch (EmptyCollectionException e) {
 					e.printStackTrace();
@@ -141,7 +139,6 @@ public class CaterpillarGame extends Frame{
 			else {
 				JOptionPane.showMessageDialog(null,"最终分数为:" + score);
 				System.exit(0);
-
 			}
 		}
 		/**
@@ -151,7 +148,7 @@ public class CaterpillarGame extends Frame{
 		private Point newPosition(){
 			int x = position.x; //获取虫头位置
 			int y = position.y;
-			System.out.println("虫头位置"+x+y);
+			//System.out.println("虫头位置"+x+y);
 			if(direction =='E') x++; //根据移动方向确定下一点
 			else if (direction =='W') x--;
 			else if (direction =='N') y--;
@@ -175,7 +172,6 @@ public class CaterpillarGame extends Frame{
 			g.setFont(new Font("黑体",Font.BOLD,15));
 			g.setColor(Color.black);
 			g.drawString("得分："+score,10,100);
-
 
 		}
 		/**
@@ -217,7 +213,7 @@ public class CaterpillarGame extends Frame{
 		QueueADT<Point> foodlocation = new LinkedQueue<>();
 		public Food(Color c,Point t) {
 			Color color=c;
-			foodPosition=new Point(10,10);
+			foodPosition=new Point(30,10);
 			foodlocation.enqueue(foodPosition);
 		}
 			//食物所在位置
@@ -235,13 +231,13 @@ public class CaterpillarGame extends Frame{
 			int z=rand.nextInt(10)+5;
 
             if(z>8) {
-	            x = foodPosition.x + rand.nextInt(5) ;
-	            y = foodPosition.y + rand.nextInt(5) ;
+	            x = foodPosition.x + rand.nextInt(5);
+	            y = foodPosition.y + rand.nextInt(5);
             }
 
             else {
             	x = foodPosition.x - rand.nextInt(5);
-            	y = foodPosition.y - rand.nextInt(5) ;
+            	y = foodPosition.y - rand.nextInt(5);
             }
 
             foodlocation.dequeue();

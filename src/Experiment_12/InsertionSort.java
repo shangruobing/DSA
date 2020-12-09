@@ -4,17 +4,18 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class  VisualSort extends Frame {
+public class InsertionSort extends Frame {
 	public static void main(String[] args) {
-		VisualSort world = new  VisualSort();
-		world.selectionSort();
+		InsertionSort world = new InsertionSort();
+		world.insertionSort();
 	}
 
-	public VisualSort() {
-		setTitle("实验十二 选择排序 尚若冰");
+	public InsertionSort() {
+		setTitle("实验十二 插入排序 尚若冰");
 		setSize(500, 300);
 		add("Center", array.getPanel());
 		addWindowListener(new CloseQuit());
+		setLocationRelativeTo(null);
 		setVisible(true);
 		for (int i = 0; i < numberOfElements; i++) {
 			int d = (int) (numberOfElements * Math.random());
@@ -32,14 +33,18 @@ public class  VisualSort extends Frame {
 	private VisualArray array = new VisualArray(data);
 	private final static int numberOfElements = 100;
 
-	public void selectionSort() {
+	public void insertionSort() {
 
-		for (int index = 0; index < data.length - 1; index++) {
-			int min = index;
-			for (int scan = index + 1; scan < data.length; scan++)
-				if (data[scan].compareTo(data[min]) < 0)
-					min = scan;
-			array.swap(min, index);
+		for (int index = 1; index < data.length; index++) {
+			int key = data[index];
+			int position = index;
+			//将大一些的变量向后移动
+			while (position > 0 && data[position-1].compareTo(key) > 0){
+				data[position] = data[position-1];
+				position--;
+			}
+			data[position] = key;
+			array.show();
 		}
 	}
 }

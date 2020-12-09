@@ -106,7 +106,6 @@ public class ArrayStack<T> implements StackADT<T> {
 	 * @return a string representation of the stack
 	 */
 	public String toString(){
-
 		String result;
         result="";
         for (int i=0;i<top;i++)
