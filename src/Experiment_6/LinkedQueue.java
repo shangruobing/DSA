@@ -67,34 +67,37 @@ public class LinkedQueue<T> implements QueueADT<T> {
 		return new iterator();
 	}
 
-private class iterator implements Iterator {
+	private class iterator implements Iterator {
 		int iteratorCount;
 		LinearNode<T> current;
-		public iterator(){
+
+		public iterator() {
 			//构造函数，当前位置指向首节点，迭代器元素个数等于容器内元素个数
-			iteratorCount=count;
-			current=front;
+			iteratorCount = count;
+			current = front;
 		}
-	public boolean hasNext() throws ConcurrentModificationException {
+
+		public boolean hasNext() throws ConcurrentModificationException {
 			//如果迭代器还有一个以上元素时返回true
-		if (iteratorCount != count)
-			throw new ConcurrentModificationException();
-		return (current != null);
+			if (iteratorCount != count)
+				throw new ConcurrentModificationException();
+			return (current != null);
 
-	}
+		}
 
-	public T next() throws ConcurrentModificationException {
+		public T next() throws ConcurrentModificationException {
 			//返回迭代器中下一个元素，如果迭代器空则抛出异常
-		if (!hasNext())
-			throw new NoSuchElementException();
+			if (!hasNext())
+				throw new NoSuchElementException();
 
-		T result = current.getElement();
-		current = current.getNext();
-		return result;
-	}
-	public void remove() throws UnsupportedOperationException {
+			T result = current.getElement();
+			current = current.getNext();
+			return result;
+		}
+
+		public void remove() throws UnsupportedOperationException {
 			//在本容器内不支持remove方法，一旦调用，则抛出异常
-		throw new UnsupportedOperationException();
-	}
+			throw new UnsupportedOperationException();
+		}
 	}
 }

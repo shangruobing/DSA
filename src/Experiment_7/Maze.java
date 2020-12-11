@@ -6,9 +6,7 @@ import java.awt.event.WindowEvent;
 
 
 public class Maze extends Frame {
-	int Min_Value=299;
-
-
+Point p;
 	public static void main(String[] args) {
 		Maze world = new Maze();
 		world.setVisible(true);
@@ -18,6 +16,7 @@ public class Maze extends Frame {
 	public Maze() {
 		setSize(350, 330);
 		setTitle("实验七 走迷宫 尚若冰");
+		setLocationRelativeTo(null);
 		addWindowListener(new CloseQuit());
 	}
 
@@ -29,7 +28,7 @@ public class Maze extends Frame {
 
 	private int mazeWidth = 5;
 	private int mazeHeight = 5;
-	private int[][] walls = {{10, 14, 5, 4, 6},
+	private int[][] walls = {{14, 14, 5, 4, 6},
 			{10, 9, 4, 3, 10},
 			{9, 5, 2, 13, 2},
 			{14, 14, 10, 12, 2},
@@ -37,41 +36,53 @@ public class Maze extends Frame {
 	private int[][] visited = new int[5][5];
 
 	private void solveMaze() {
-		//用迷宫的起始点（右下角）初始队列
+		//用迷宫的起始点（右下角）初始栈
 		StackADT<Point> stack = new ArrayStack<>();
 		stack.push(new Point(mazeWidth - 1, mazeHeight - 1));
-		//System.out.println(stack.toString());
 
 		int visitCount = 0;
+
 		while (!stack.isEmpty()) {//开始搜索
 			Point p;
+			//System.out.println(stack.toString());
 			try {
 				p = stack.pop();
-				//	System.out.println(p);
-
 				if (visited[p.x][p.y] == 0) {//未搜索过的新点
-					visited[p.x][p.y] =++visitCount;
-                 // if( (p.x-1>0)&&(walls[p.x][p.y] & 8) == 0)
-                 //visited[p.x][p.y]=visited[p.x-1][p.y];
-					//if ((p.x+1<5)&&(walls[p.x][p.y] & 2) == 0)
-                  // visited[p.x+1][p.y]=++visited[p.x][p.y];
-					//if ((p.y-1>0)&&(walls[p.x][p.y] & 4) == 0)
-					//	visited[p.x][p.y]=visited[p.x][p.y-1];
-					//if ((p.y+1<5)&&(walls[p.x][p.y] & 1) == 0)
-                  // visited[p.x][p.y+1]=++visited[p.x][p.y];
+					//System.out.println(p);//试探过的点
+					//	System.out.println(stack.toString());
+					visited[4][4]=1;
+					visited[p.x][p.y]=++visitCount;
 
+					//if(visited[p.x][p.y-1]!=0)
+					//visited[p.x][p.y] = visited[p.x][p.y-1]++;
+					//visited[p.x][p.y] = ++visitCount;
 					repaint();
 
 					if ((p.x == 0) && (p.y == 0))
 						return;//搜索成功
+
 					putNeighbors(p.x, p.y, stack);
+				}
+               // else{
+				////if(p.x<4&&p.y<4)
+				//if(((walls[p.x][p.y] & 2) != 0)&&(visited[p.x][p.y]==visited[p.x][p.y+1])&&((walls[p.x][p.y] & 2) != 0)&&((walls[p.x][p.y] & 4) != 0)&&((walls[p.x][p.y] & 8)!= 0))
+				//System.out.println(p.x+","+p.y);
+					else visited[p.x][p.y]=--visitCount;
+				   // if(p.y-1>0)
+					//if(visited[p.x][p.y-1]!=0&&(walls[p.x][p.y] & 4) != 0)
+					//visited[p.x][p.y]=visited[p.x][p.y-1]+1;}
+
+			 //	if ((walls[p.x][p.y] & 1) == 0)
+					//visited[p.x][p.y] = 0;
+
+					//visited[p.x][p.y] = --visitCount;
+
 
 					try {
 						Thread.sleep(200);
 					} catch (Exception e) {
 					}
-				}
-
+			//	}
 
 			} catch (EmptyCollectionException e1) {
 				e1.printStackTrace();
@@ -101,14 +112,28 @@ public class Maze extends Frame {
 
 	private void putNeighbors(int x, int y, StackADT<Point> stack) {
 
-		if ((walls[x][y] & 1) == 0) stack.push(new Point(x + 1, y)); //下方有墙 新产生的点在该点右方
-		if ((walls[x][y] & 2) == 0) stack.push(new Point(x, y + 1)); //右方有墙 新产生的点在该点下方
-		if ((walls[x][y] & 4) == 0) stack.push(new Point(x - 1, y)); //上方有墙 新产生的点在该点左方
-		if ((walls[x][y] & 8) == 0) stack.push(new Point(x, y - 1)); //左方有墙 新产生的点在该点上方
+		if ((walls[x][y] & 1) == 0){
+	//		visited[p.x][p.y]=++visited[p.x+1][p.y];
+			stack.push(new Point(x + 1, y)); //下方无墙 新产生的点在该点右方
+
+		}
+		if ((walls[x][y] & 2) == 0){
+		//	visited[p.x][p.y]=++visited[p.x][p.y+1];
+			stack.push(new Point(x, y + 1)); //右方无墙 新产生的点在该点下方
+
+		}
+		if ((walls[x][y] & 4) == 0) {
+//			visited[p.x][p.y]=++visited[p.x-1][p.y];
+			stack.push(new Point(x -1, y));//上方无墙 新产生的点在该点左方
+
+		}
+		if ((walls[x][y] & 8) == 0) {
+		//	visited[p.x][p.y] = ++visited[p.x][p.y-1];
+			stack.push(new Point(x, y - 1)); //左方无墙 新产生的点在该点上方
+		}
 		//System.out.println(stack.toString());
-
+		//System.out.println("新点"+x+","+y);
 	}
-
 }
 
 

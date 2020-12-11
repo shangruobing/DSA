@@ -33,6 +33,7 @@ public class hanoiGame extends Frame implements ActionListener {
 		this.add(panel,BorderLayout.SOUTH);
 		setSize(400,300);
 		setTitle("实验十一 自动汉诺塔游戏 尚若冰");
+		setLocationRelativeTo(null);
 		addWindowListener(new CloseQuit());
 
 	}
@@ -42,14 +43,15 @@ public class hanoiGame extends Frame implements ActionListener {
 		}
 	}
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() instanceof Button) //点击按钮命令
-		{ Button bt=(Button)e.getSource();
+		if(e.getSource() instanceof Button){
+			Button bt=(Button)e.getSource();
 			if(bt==start&& count.getText()!=null){ //开始命令
 				int n =Integer.parseInt(count.getText());
 				hanoi=new Hanoi(n);
+				hanoi.repaint();
 				this.add(hanoi, BorderLayout.CENTER);
 				setSize(400,300);
-				System.out.println("n为"+n);
+				//System.out.println("n为"+n);
 
 
 			}

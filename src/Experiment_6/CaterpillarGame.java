@@ -165,7 +165,7 @@ public class CaterpillarGame extends Frame{
 
 			while(e.hasNext()){ //将虫体用圆形画出来
 				Point p= e.next();
-				if(p!=null)
+				//if(p!=null)
 				g.fillOval(5+CaterpillarGame.SegmentSize*p.x,10+CaterpillarGame.SegmentSize*p.y,
 						CaterpillarGame.SegmentSize, CaterpillarGame.SegmentSize);
 			}

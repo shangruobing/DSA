@@ -3,6 +3,10 @@
   <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/src/Experiment_1/TestA.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/Experiment_1/TestB.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Experiment_10/Asteroid.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Experiment_10/AsteroidGame.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Experiment_10/Rocket.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Experiment_10/Station.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/Experiment_11/Hanoi.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/Experiment_11/hanoiGame.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/Experiment_12/BubbleSort.java" charset="UTF-8" />
@@ -29,7 +33,7 @@
     <file url="file://$PROJECT_DIR$/src/Experiment_5/LinkedQueue.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/Experiment_5/QueueADT.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/Experiment_5/TestQueue.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/Experiment_6/CaterpillarGame.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Experiment_6/CaterpillarGame.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/Experiment_8/ArrayIterator.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/Experiment_8/ArrayList.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/Experiment_8/ArrayOrderedList.java" charset="UTF-8" />

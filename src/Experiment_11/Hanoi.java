@@ -113,4 +113,6 @@ public class Hanoi extends Panel {
 		System.out.println("Move one disk from " + start + " to " + end);
 	}
 
+
+
 }
