@@ -93,14 +93,12 @@ public class CaterpillarGame extends Frame{
 		private QueueADT<Point> body = new LinkedQueue<>();//虫体所在位置
 		private QueueADT<Character> commands = new LinkedQueue<>(); //键盘命令
 
-
 		public void setDirection(char d) {
 			commands.enqueue(d);
 		}
 
-
 		public void move (CaterpillarGame game){
-		// 先看是否要改变方向
+			// 先看是否要改变方向
 			if (commands.size()>0){
 				Character c;
 				try {
@@ -110,9 +108,9 @@ public class CaterpillarGame extends Frame{
 					e.printStackTrace();
 				}
 			}
-		//再找到下一点的位置
+			//再找到下一点的位置
 			Point np =newPosition();
-		//去掉尾部一节,在新的一点加下头部一节
+			//去掉尾部一节,在新的一点加下头部一节
 			if (game.canMove(np)){
 				try {
 					//System.out.println("食物位置"+food.foodPosition);
@@ -148,7 +146,7 @@ public class CaterpillarGame extends Frame{
 		private Point newPosition(){
 			int x = position.x; //获取虫头位置
 			int y = position.y;
-			//System.out.println("虫头位置"+x+y);
+
 			if(direction =='E') x++; //根据移动方向确定下一点
 			else if (direction =='W') x--;
 			else if (direction =='N') y--;
@@ -165,7 +163,7 @@ public class CaterpillarGame extends Frame{
 
 			while(e.hasNext()){ //将虫体用圆形画出来
 				Point p= e.next();
-				//if(p!=null)
+
 				g.fillOval(5+CaterpillarGame.SegmentSize*p.x,10+CaterpillarGame.SegmentSize*p.y,
 						CaterpillarGame.SegmentSize, CaterpillarGame.SegmentSize);
 			}
@@ -220,12 +218,11 @@ public class CaterpillarGame extends Frame{
 		private Point getFoodPosition() {
 			int x = foodPosition.x; //获取食物位置
 			int y = foodPosition.y;
-			//System.out.println("食物位置"+x+y);
 			return new Point(x, y);
 		}
 
 		private Point newFoodPosition(){
-			//改变食物位置
+			//利用随机数改变食物位置
 			int x,y;
 			Random rand = new Random();
 			int z=rand.nextInt(10)+5;

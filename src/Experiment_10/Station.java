@@ -1,21 +1,30 @@
 package Experiment_10;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class Station {
-	public Station( double ix,double iy){x=ix;y=iy;}
+	Image Plane;
+	public Station( double ix,double iy){
+		x=ix;y=iy;
+	}
 
 	private double angle = Math.PI/2.0;
-	private int hits = 0;
-	private final double x;
-	private final double y;
+	private int hits = 100;
+	private double x;
+	private double y;
 
-	
+	public void moveUp(){
+		y = y -20;
+	}
+	public void moveDown(){
+		y = y +20;
+	}
 	public void moveLeft(){
-		angle = angle +0.1;
+		x = x -20;
 	}
 	public void moveRight(){
-		angle = angle -0.1;
+		x = x +20;
 	}
 
 	/**
@@ -25,9 +34,9 @@ public class Station {
 	public void fire (UnorderedListADT<Rocket> rockets){
 		double cosAngle = Math.cos(angle);
 		double sinAngle = Math.sin(angle);
-		  // rocket goes same direction as gun is pointing
-		Rocket r= new Rocket(x +15*cosAngle, y-15 *sinAngle, 5*cosAngle, -5*sinAngle);
-		rockets.addToRear(r);		
+
+		Rocket rocket= new Rocket(x +15*cosAngle, y-15 *sinAngle, 5*cosAngle, -5*sinAngle);
+		rockets.addToRear(rocket);
 	}
 
 	/**
@@ -36,18 +45,16 @@ public class Station {
 	 */
 	public void checkHid(Asteroid rock){
 		if (rock.nearTo(x, y))
-			hits += rock.size;
-
-
+			hits =hits-rock.size;
+		if (hits<=0){
+			JOptionPane.showMessageDialog(null,"最终分数为:" + AsteroidGame.score);
+			System.exit(0);
+		}
 	}
-	//画出炮站
+	//画出飞机
 	public void paint(Graphics g){
-
-		double lv = 20 *Math.sin(angle); //炮有 20个像素点长
-		double lh = 20 * Math.cos(angle);
-		g.drawLine((int)x, (int) y, (int)(x+lh),(int)( y-lv));
-		g.drawString("hits:" +hits, (int)(x+10),(int)(y-5));
-
-
+		g.drawString("生命值:" +hits, 300,380);
+		Plane = new ImageIcon("C:/Users/冰/Desktop/DSA/src/Experiment_10/Plane.png").getImage();
+		g.drawImage(Plane, (int)x-40,(int)y-70,90,90,null);
 	}
 }

@@ -1,12 +1,12 @@
 package Experiment_10;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class Asteroid {
 	public Asteroid (double ix,double iy,double idx,double idy) {
 		x = ix; y=iy;dx=idx; dy=idy;
 	}
-	public int score;
 	public double x,y;
 	public int size = 20;
 	public double dx,dy;
@@ -18,16 +18,13 @@ public class Asteroid {
 	}
 
 	public void paint(Graphics g){
-		g.setColor(Color.black);
-		g.drawOval((int) x, (int) y, size, size);
-		//g.drawString("得分"+score,10,100);
-	//	g.drawString("得分"+score,10,100);
+		Image Plant;
+		Plant =new ImageIcon("C:/Users/冰/Desktop/DSA/src/Experiment_10/Plant.png").getImage();
+		g.drawImage(Plant,(int) x, (int) y, size+25, size+25,null);
 	}
 
 	public void hit(){
-		size = size -4;
-		score++;
-		System.out.println("当前得分为"+score);
+		size = size -15;
 	}
 
 	/**
@@ -37,9 +34,7 @@ public class Asteroid {
 	 * @return 是否靠近指定点
 	 */
 	public boolean nearTo(double tx,double ty){
-		// use Pythagorean theorem to determine distance between points
 		double distance = Math.sqrt((x-tx)*(x-tx)+(y-ty)*(y-ty));
 		return distance <size;
 	}
-
 }

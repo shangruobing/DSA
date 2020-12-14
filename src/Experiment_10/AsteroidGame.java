@@ -1,44 +1,51 @@
 package Experiment_10;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.Iterator;
 
 public class AsteroidGame extends Frame{
-	static public void main (String []args){
+
+	public static void main (String []args){
 		AsteroidGame world = new AsteroidGame();
 		world.setVisible(true);
 		world.run();
 	}
-	
+
 	public AsteroidGame(){
 		setTitle("实验十  太空大战  尚若冰");
 		setSize(FrameWidth,FrameHeight);
+		setVisible(true);
 		addKeyListener(new KeyReader());
 		addWindowListener(new CloseQuit());
 		setLocationRelativeTo(null);
-		
 	}
+
 	private static class CloseQuit extends WindowAdapter{
 		public void windowClosing(WindowEvent e) {
+			JOptionPane.showMessageDialog(null,"最终分数为:" + score);
 			System.exit(0);
 		}
 	}
-    private int score=0;
+
+	Image background;
+	public static int score=0; //static 类名.变量名 便可直接引用 注意：全局变量和局部变量
 	private int FrameWidth = 500;
 	private int FrameHeight = 400;
 	private UnorderedListADT<Asteroid> asteroids = new ArrayUnorderedList<Asteroid>();
 	private UnorderedListADT<Rocket> rockets = new ArrayUnorderedList<Rocket>();
 	private Station station = new Station(FrameWidth/2, FrameHeight - 20);
-	//Asteroid asteroid = new Asteroid(3,3,3,3);
+
 	public void paint(Graphics g){
+		background = new ImageIcon("C:/Users/冰/Desktop/DSA/src/Experiment_10/StarWar.jpg").getImage();
+		g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
+
+		g.setColor(Color.white);
+		g.setFont(new Font("宋体",Font.BOLD,15));
+		g.drawString("得分："+AsteroidGame.score,10,100);
 		station.paint(g);
-	//	g.setColor(Color.blue);
-		//g.drawString("得分"+score,100,10);
-		//asteroid.paint(g);
+
 		Iterator<Asteroid> e = asteroids.iterator();
 		while (e.hasNext()){
 			Asteroid rock = (Asteroid) e.next();
@@ -49,8 +56,8 @@ public class AsteroidGame extends Frame{
 			Rocket rock =(Rocket) e1.next();
 			rock.paint(g);
 		}
-	//g.drawString("得分"+score,100,10);
 	}
+
 	/**
 	 * 键盘响应事件函数
 	 * @author Huarong Du
@@ -60,10 +67,15 @@ public class AsteroidGame extends Frame{
 		public void keyPressed(KeyEvent e){
 			char key = e.getKeyChar();
 			switch(key){
-			  case 'j': station.moveLeft();break;
-			  case 'k': station.moveRight();break;
+			  case 'w': station.moveUp();break;
+			  case 's': station.moveDown();break;
+			  case 'a': station.moveLeft();break;
+			  case 'd': station.moveRight();break;
 			  case ' ': station.fire(rockets);break;
-			  case 'q': System.exit(0);
+			  case 'q': {
+				  JOptionPane.showMessageDialog(null,"最终分数为:" + score);
+				  System.exit(0);
+			  }
 			}
 		}
 	}
@@ -82,7 +94,6 @@ public class AsteroidGame extends Frame{
 			Asteroid rock = (Asteroid) e.next();
 			if(rock!=null){
 				rock.move();
-
 				if (outofscreen(rock.x,rock.y))
 				try {   //删除屏幕外的行星
 					asteroids.remove(rock);
@@ -92,7 +103,6 @@ public class AsteroidGame extends Frame{
 					e2.printStackTrace();
 				}
 				station.checkHid(rock);
-
 			}
 		}
 		Iterator<Rocket> e1 = rockets.iterator();
@@ -118,7 +128,8 @@ public class AsteroidGame extends Frame{
 	 * @return  该点是否在屏幕内
 	 */
 	private boolean outofscreen(double x,double y){
-		if (x<0||x>FrameWidth ||y<0 ||y> FrameHeight ) return true;
+		if (x<0||x>FrameWidth ||y<0 ||y> FrameHeight )
+			return true;
 		return false;
 	}
 	/**
