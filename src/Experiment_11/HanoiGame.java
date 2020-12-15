@@ -3,10 +3,10 @@ package Experiment_11;
 import java.awt.*;
 import java.awt.event.*;
 
-public class hanoiGame extends Frame implements ActionListener{
+public class HanoiGame extends Frame implements ActionListener{
 
 	public static void main(String[] args) {
-		hanoiGame world = new hanoiGame();
+		HanoiGame world = new HanoiGame();
 		world.setVisible(true);
 	}
 	public static int Disks;
@@ -14,7 +14,7 @@ public class hanoiGame extends Frame implements ActionListener{
 	Button confirm,start;
 	Panel pan;
 	TextField field;
-	public hanoiGame(){
+	public HanoiGame(){
 		Label label=new Label("盘数");
 		confirm = new Button("确定");
 		start = new Button("开始");
