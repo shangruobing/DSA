@@ -11,28 +11,21 @@ public class hanoiGame extends Frame implements ActionListener{
 	}
 	public static int Disks;
 	Hanoi h;
-	Button star,move;
+	Button start,move;
 	Panel pan;
-	TextField tf1,source,target;
+	TextField tf1;
 	public hanoiGame(){
 		Label lb1=new Label("盘数");
-		Label lb2=new Label("从");
-		Label lb3=new Label("移到");
-		star = new Button("开始");
-		star.addActionListener(this);
+		start = new Button("开始");
+		start.addActionListener(this);
 		move = new Button("移动");
 		move.addActionListener(this);
 		tf1 = new TextField(3);
-		source = new TextField(3);
-		target = new TextField(3);
+
 		pan = new Panel();
 		pan.add(lb1);
 		pan.add(tf1);
-		pan.add(star);
-		pan.add(lb2);
-		pan.add(source);
-		pan.add(lb3);
-		pan.add(target);
+		pan.add(start);
 		pan.add(move);
 		this.add(pan,BorderLayout.SOUTH);
 		setSize(400,300);
@@ -48,7 +41,7 @@ public class hanoiGame extends Frame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() instanceof Button){ //点击按钮命令
 			Button bt=(Button)e.getSource();
-			if(bt==star&& tf1.getText()!=null){ //开始命令
+			if(bt==start&& tf1.getText()!=null){ //开始命令
 				Disks =Integer.parseInt(tf1.getText());
 				h= new Hanoi();
 				this.add(h, BorderLayout.CENTER);
