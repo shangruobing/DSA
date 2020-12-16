@@ -10,7 +10,7 @@ public class Hanoi extends Panel {
 	private int totalDisks;
 
 	public Hanoi() {
-		totalDisks = hanoiGame.Disks;
+		totalDisks = HanoiGame.Disks;
 		poleA = new int[totalDisks + 1];
 		poleB = new int[totalDisks + 1];
 		poleC = new int[totalDisks + 1];

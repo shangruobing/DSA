@@ -93,19 +93,19 @@ public class Maze extends Frame {
 	private void putNeighbors(int x, int y, StackADT<Point> stack) {
 
 		if ((walls[x][y] & 1) == 0){
-			stack.push(new Point(x + 1, y)); //下方无墙 新产生的点在该点右方
+			stack.push(new Point(x + 1, y)); //下方有墙 新产生的点在该点右方
 
 		}
 		if ((walls[x][y] & 2) == 0){
-			stack.push(new Point(x, y + 1)); //右方无墙 新产生的点在该点下方
+			stack.push(new Point(x, y + 1)); //右方有墙 新产生的点在该点下方
 
 		}
 		if ((walls[x][y] & 4) == 0) {
-			stack.push(new Point(x -1, y));//上方无墙 新产生的点在该点左方
+			stack.push(new Point(x -1, y));//上方有墙 新产生的点在该点左方
 
 		}
 		if ((walls[x][y] & 8) == 0) {
-			stack.push(new Point(x, y - 1)); //左方无墙 新产生的点在该点上方
+			stack.push(new Point(x, y - 1)); //左方有墙 新产生的点在该点上方
 		}
 	}
 }
