@@ -119,7 +119,6 @@ public class CaterpillarGame extends Frame{
 					if (food.getFoodPosition().equals(newPosition())){
 						body.enqueue(np);
 						position = np;
-						position = np;
 						score++;
 						food.newFoodPosition();
 					}
