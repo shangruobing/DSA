@@ -38,7 +38,7 @@ public class AsteroidGame extends Frame{
 	private Station station = new Station(FrameWidth/2, FrameHeight - 20);
 
 	public void paint(Graphics g){
-		background = new ImageIcon("C:/Users/冰/Desktop/DSA/src/Experiment_10/StarWar.jpg").getImage();
+		background = new ImageIcon("C:/Users/冰/Desktop/DSA/src/Experiment_10/StarWar.png").getImage();
 		g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
 
 		g.setColor(Color.white);

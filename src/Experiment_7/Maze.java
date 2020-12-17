@@ -49,10 +49,10 @@ public class Maze extends Frame {
 				System.out.println(stack.toString());
 				if (visited[p.x][p.y] == 0) {//未搜索过的新点
 					visited[p.x][p.y]=++visitCount;
-
+					putNeighbors(p.x, p.y, stack);
+					repaint();
 					if ((p.x == 0) && (p.y == 0))
 						return;//搜索成功
-					putNeighbors(p.x, p.y, stack);
 				}
                 else
 				visited[p.x][p.y]=--visitCount;
