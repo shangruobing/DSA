@@ -25,13 +25,11 @@ public class LinkedOrderedList<T> extends LinkedList<T> implements OrderedListAD
 	 * @param element the element to be added to this list
 	 * @throws NonComparableElementException if the element is not comparable
 	 */
-	public void add(T element)
-	{
+	public void add(T element) {
 		if (!(element instanceof Comparable))
 			throw new NonComparableElementException("LinkedOrderedList");
 
 		Comparable<T> comparableElement = (Comparable<T>)element;
-
 		LinearNode<T> current = head;
 		LinearNode<T> previous = null;
 		LinearNode<T> newNode  = new LinearNode<T>(element);

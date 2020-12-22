@@ -224,17 +224,8 @@ public class CaterpillarGame extends Frame{
 			//利用随机数改变食物位置
 			int x,y;
 			Random rand = new Random();
-			int z=rand.nextInt(10)+5;
-
-            if(z>8) {
-	            x = foodPosition.x + rand.nextInt(5);
-	            y = foodPosition.y + rand.nextInt(5);
-            }
-
-            else {
-            	x = foodPosition.x - rand.nextInt(5);
-            	y = foodPosition.y - rand.nextInt(5);
-            }
+			x = rand.nextInt(BoardWidth-1)+1;
+			y = rand.nextInt(BoardHeight-1)+1;
 
             foodlocation.dequeue();
             foodPosition=new Point(x,y);
