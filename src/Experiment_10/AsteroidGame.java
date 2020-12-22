@@ -42,7 +42,7 @@ public class AsteroidGame extends Frame{
 		g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
 
 		g.setColor(Color.white);
-		g.setFont(new Font("宋体",Font.BOLD,15));
+		g.setFont(new Font("宋体",Font.PLAIN,15));
 		g.drawString("得分："+AsteroidGame.score,10,100);
 		station.paint(g);
 
@@ -56,6 +56,15 @@ public class AsteroidGame extends Frame{
 			Rocket rock =(Rocket) e1.next();
 			rock.paint(g);
 		}
+	}
+
+	public void update(Graphics g) {  //利用双缓冲解决频闪
+		Image offScreenImage = null;
+		if(offScreenImage == null)
+		offScreenImage = this.createImage(FrameWidth, FrameHeight);     //新建一个图像缓存空间
+		Graphics gImage = offScreenImage.getGraphics();  //把画笔拿过来,给gImage保存着
+		paint(gImage);                                   //将要画的东西画到图像缓存空间去  
+		g.drawImage(offScreenImage, 0, 0, null); //然后一次性显示出来
 	}
 
 	/**

@@ -45,7 +45,7 @@ public class Station {
 	 */
 	public void checkHid(Asteroid rock){
 		if (rock.nearTo(x, y))
-			hits =hits-rock.size;
+			hits =hits- rock.size;
 		if (hits<=0){
 			JOptionPane.showMessageDialog(null,"最终分数为:" + AsteroidGame.score);
 			System.exit(0);
