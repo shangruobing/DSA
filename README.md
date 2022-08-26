@@ -1,8 +1,9 @@
 # DSA
-Data Structure and Algorithm for Java.
+**Data Structure and Algorithm for Java**
 
-Kunming University of Science and Technology Information Management and Information System major sophomore first semester course.
-
-Use Java language to implement data structure.
-
-September 2020 to January 2021.
+- Use Java language to implement data structure and learning algorithms
+- Kunming University of Science and Technology
+- Information Management and Information System
+- Sophomore first semester course
+- September 2020 to January 2021
+- The instructor is Dong Yiming
